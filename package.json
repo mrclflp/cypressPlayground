@@ -1,0 +1,26 @@
+{
+  "name": "cypressplayground",
+  "version": "1.0.0",
+  "description": "My personal Cypress playground.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrclflp/cypressPlayground.git"
+  },
+  "keywords": [
+    "cypress",
+    "playground"
+  ],
+  "author": "mrclflp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrclflp/cypressPlayground/issues"
+  },
+  "homepage": "https://github.com/mrclflp/cypressPlayground#readme",
+  "devDependencies": {
+    "cypress": "^13.5.1"
+  }
+}
