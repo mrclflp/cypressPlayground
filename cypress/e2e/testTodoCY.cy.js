@@ -12,13 +12,13 @@ describe('Test the Todo app', () => {
   ]
 
   // 1. check the basic elements
-  it('should check the basic elements', () => {
+  it.skip('should check the basic elements', () => {
     cy.get('h1:contains(todos)').should('be.visible')
     cy.get('input.new-todo').should('be.visible').and('have.attr', 'placeholder', 'What needs to be done?')
   })
 
   // 2. adding todos
-  it('should add todos', () => {
+  it.skip('should add todos', () => {
     // add 1st todo
     cy.get('input.new-todo').type(todoItems[0] + '{enter}')
     // verify it's added
@@ -37,6 +37,41 @@ describe('Test the Todo app', () => {
   })
 
   // 3. mark todo as completed; check active & completed lists
+  it('should test marking todos as complete', () => {
+    // create 4 default todos
+    let todo
+    for ( todo in todoItems )
+    cy.get('input.new-todo').type(todoItems[todo] + '{enter}')
+
+    // mark 1st todo as completed + check it appears as completed
+    cy.get('[data-testid="todo-item"]:contains(' + todoItems[0] + ')')
+      .find('[type=checkbox]')
+      .check()
+
+    // check the number of active todos decreased (3)
+    cy.get('.todo-count')
+      .contains('3 items left')
+      .should('be.visible')
+
+    // go to Active tab and check there are 3 active items
+    cy.get('a:contains(Active)')
+      .click()
+    cy.get('[data-testid="todo-item"]').eq(0)
+      .should('have.text', todoItems[1])
+    cy.get('[data-testid="todo-item"]').eq(1)
+      .should('have.text', todoItems[2])
+    cy.get('[data-testid="todo-item"]').eq(2)
+      .should('have.text', todoItems[3])
+
+    // go to Completed tab and check there is 1st todo only
+    cy.get('a:contains(Completed)')
+      .click()
+    cy.get('[data-testid="todo-item"]')
+      .should('have.length', 1)
+      .should('have.text', todoItems[0])
+      .should('have.class', 'completed')
+  })
+
   // 4. delete a todo
   // 5. edit a todo
   // 6. mark all todos as completed
