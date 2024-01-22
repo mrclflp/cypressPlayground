@@ -12,13 +12,13 @@ describe('Test the Todo app', () => {
   ]
 
   // 1. check the basic elements
-  it.skip('should check the basic elements', () => {
+  it('should check the basic elements', () => {
     cy.get('h1:contains(todos)').should('be.visible')
     cy.get('input.new-todo').should('be.visible').and('have.attr', 'placeholder', 'What needs to be done?')
   })
 
   // 2. adding todos
-  it.skip('should add todos', () => {
+  it('should add todos', () => {
     // add 1st todo
     cy.get('input.new-todo').type(todoItems[0] + '{enter}')
     // verify it's added
