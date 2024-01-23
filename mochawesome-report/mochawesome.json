@@ -1,0 +1,195 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-01-23T07:56:37.391Z",
+    "end": "2024-01-23T07:56:44.917Z",
+    "duration": 7526,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "35fe61cb-b519-41d0-a7db-510dfc58cb78",
+      "title": "",
+      "fullFile": "cypress/e2e/testTodoCY.cy.js",
+      "file": "cypress/e2e/testTodoCY.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "80f667c1-e55f-483c-a103-c3ed22b49087",
+          "title": "Test the Todo app",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should check the basic elements",
+              "fullTitle": "Test the Todo app should check the basic elements",
+              "timedOut": null,
+              "duration": 376,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.get('h1:contains(todos)').should('be.visible');\ncy.get('input.new-todo').should('be.visible').and('have.attr', 'placeholder', 'What needs to be done?');",
+              "err": {},
+              "uuid": "833b478a-6834-409c-9597-7e03759b5f92",
+              "parentUUID": "80f667c1-e55f-483c-a103-c3ed22b49087",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should add todos",
+              "fullTitle": "Test the Todo app should add todos",
+              "timedOut": null,
+              "duration": 653,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// add 1st todo\ncy.get('input.new-todo').type(todoItems[0] + '{enter}');\n// verify it's added\ncy.get('[data-testid=\"todo-item\"]').should('have.length', 1);\ncy.get('[data-testid=\"todo-item\"]').contains(todoItems[0]).should('be.visible');\n// check the counter of added todos (1)\ncy.get('[data-testid=\"todo-count\"]').should('include.text', '1 item left');\n// add 2nd todo\ncy.get('input.new-todo').type(todoItems[1] + '{enter}');\n// verify it's added\ncy.get('[data-testid=\"todo-item\"]').should('have.length', 2);\ncy.get('[data-testid=\"todo-item\"]').contains(todoItems[0]).should('be.visible');\ncy.get('[data-testid=\"todo-item\"]').contains(todoItems[1]).should('be.visible');\n// check the counter of added todos (2)\ncy.get('[data-testid=\"todo-count\"]').should('include.text', '2 items left');",
+              "err": {},
+              "uuid": "c85777e2-256e-4e05-8280-32ba82faa672",
+              "parentUUID": "80f667c1-e55f-483c-a103-c3ed22b49087",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should mark todo as complete",
+              "fullTitle": "Test the Todo app should mark todo as complete",
+              "timedOut": null,
+              "duration": 1599,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// create 4 default todos\ncy.createDefaultTodos();\n// mark 1st todo as completed + check it appears as completed\ncy.get('[data-testid=\"todo-item\"]:contains(' + todoItems[0] + ')').find('[type=checkbox]').check();\n// check the number of active todos decreased (3)\ncy.get('.todo-count').contains('3 items left').should('be.visible');\n// go to Active tab and check there are 3 active items\ncy.get('a:contains(Active)').click();\ncy.get('[data-testid=\"todo-item\"]').eq(0).should('have.text', todoItems[1]);\ncy.get('[data-testid=\"todo-item\"]').eq(1).should('have.text', todoItems[2]);\ncy.get('[data-testid=\"todo-item\"]').eq(2).should('have.text', todoItems[3]);\n// go to Completed tab and check there is 1st todo only\ncy.get('a:contains(Completed)').click();\ncy.get('[data-testid=\"todo-item\"]').should('have.length', 1).should('have.text', todoItems[0]).should('have.class', 'completed');",
+              "err": {},
+              "uuid": "62f0ca3a-0f1d-4d1a-96f5-d4918d701f1f",
+              "parentUUID": "80f667c1-e55f-483c-a103-c3ed22b49087",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should delete todo",
+              "fullTitle": "Test the Todo app should delete todo",
+              "timedOut": null,
+              "duration": 1309,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// create 4 default todos\ncy.createDefaultTodos();\n// delete 4th todo\ncy.get('[data-testid=\"todo-item\"]').last().find('.destroy').click({\n  force: true\n});\n// check the list contains only 3 todos now\ncy.get('[data-testid=\"todo-item\"]').eq(0).should('be.visible').should('have.text', todoItems[0]);\ncy.get('[data-testid=\"todo-item\"]').eq(1).should('be.visible').should('have.text', todoItems[1]);\ncy.get('[data-testid=\"todo-item\"]').eq(2).should('be.visible').should('have.text', todoItems[2]);\ncy.get('[data-testid=\"todo-item\"]').contains(todoItems[3]).should('not.exist');",
+              "err": {},
+              "uuid": "2dd95540-c122-4bfd-b79d-28abfb951e42",
+              "parentUUID": "80f667c1-e55f-483c-a103-c3ed22b49087",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should edit todo",
+              "fullTitle": "Test the Todo app should edit todo",
+              "timedOut": null,
+              "duration": 1867,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// create default todos\ncy.createDefaultTodos();\n// edit 3rd todo\ncy.get('[data-testid=\"todo-item\"]').eq(2).dblclick().find('.edit').clear().type('book wellness for Sunday{enter}');\n// check the 3rd todo is actually edited\ncy.get('[data-testid=\"todo-item\"]').eq(2).should('have.text', 'book wellness for Sunday');",
+              "err": {},
+              "uuid": "fec1748c-ee2e-48d9-b794-9bff83e71c5b",
+              "parentUUID": "80f667c1-e55f-483c-a103-c3ed22b49087",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should mark all todos as completed",
+              "fullTitle": "Test the Todo app should mark all todos as completed",
+              "timedOut": null,
+              "duration": 1541,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// create default todos\ncy.createDefaultTodos();\n// mark all todos as complete\ncy.get('#toggle-all').check();\nlet todo;\nfor (todo in todoItems) cy.get('[data-testid=\"todo-item\"]').eq(todo).should('have.class', 'completed');\n// check the number of active todos is 0\ncy.get('.todo-count').should('have.text', '0 items left');\n// check all todos are actually completed\ncy.get('a:contains(Completed)').click();\ncy.get('[data-testid=\"todo-item\"]').should('have.length', 4);\ncy.get('a:contains(Active)').click();\ncy.get('[data-testid=\"todo-item\"]').should('have.length', 0);",
+              "err": {},
+              "uuid": "460ad466-e120-40c5-afa1-b3d0800d18f4",
+              "parentUUID": "80f667c1-e55f-483c-a103-c3ed22b49087",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "833b478a-6834-409c-9597-7e03759b5f92",
+            "c85777e2-256e-4e05-8280-32ba82faa672",
+            "62f0ca3a-0f1d-4d1a-96f5-d4918d701f1f",
+            "2dd95540-c122-4bfd-b79d-28abfb951e42",
+            "fec1748c-ee2e-48d9-b794-9bff83e71c5b",
+            "460ad466-e120-40c5-afa1-b3d0800d18f4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 7345,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}

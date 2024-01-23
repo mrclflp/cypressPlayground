@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mrclflp/cypressPlayground#readme",
   "devDependencies": {
-    "cypress": "^13.6.3"
+    "cypress": "^13.6.3",
+    "mochawesome": "^7.1.3"
   }
 }
