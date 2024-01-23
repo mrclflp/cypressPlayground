@@ -23,3 +23,16 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('createDefaultTodos', () => {
+  const todoItems = [
+    'buy milk & eggs',
+    'call grandma',
+    'plan birthday party',
+    'get tickets to the movies',
+  ]
+  
+  let todo
+  for ( todo in todoItems )
+    cy.get('input.new-todo').type(todoItems[todo] + '{enter}')
+})
