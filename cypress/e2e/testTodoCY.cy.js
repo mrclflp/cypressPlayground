@@ -95,5 +95,21 @@ describe('Test the Todo app', () => {
   })
 
   // 5. edit a todo
+  it('should edit todo', () => {
+    // create default todos
+    cy.createDefaultTodos()
+
+    // edit 3rd todo
+    cy.get('[data-testid="todo-item"]').eq(2)
+      .dblclick()
+      .find('.edit')
+      .clear()
+      .type('book wellness for Sunday{enter}')
+
+    // check the 3rd todo is actually edited
+    cy.get('[data-testid="todo-item"]').eq(2)
+      .should('have.text', 'book wellness for Sunday')
+  })
+
   // 6. mark all todos as completed
 })
