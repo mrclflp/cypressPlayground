@@ -112,4 +112,31 @@ describe('Test the Todo app', () => {
   })
 
   // 6. mark all todos as completed
+  it('should mark all todos as completed', () => {
+    // create default todos
+    cy.createDefaultTodos()
+
+    // mark all todos as complete
+    cy.get('#toggle-all')
+      .check()
+      
+    let todo
+    for ( todo in todoItems )
+      cy.get('[data-testid="todo-item"]').eq(todo)
+        .should('have.class', 'completed')
+
+    // check the number of active todos is 0
+    cy.get('.todo-count')
+      .should('have.text', '0 items left')
+
+    // check all todos are actually completed
+    cy.get('a:contains(Completed)')
+      .click()
+    cy.get('[data-testid="todo-item"]')
+      .should('have.length', 4)
+    cy.get('a:contains(Active)')
+      .click()
+    cy.get('[data-testid="todo-item"]')
+      .should('have.length', 0)
+  })
 })
