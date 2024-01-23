@@ -37,11 +37,11 @@ describe('Test the Todo app', () => {
   })
 
   // 3. mark todo as completed; check active & completed lists
-  it('should test marking todos as complete', () => {
+  it('should mark todo as complete', () => {
     // create 4 default todos
     let todo
     for ( todo in todoItems )
-    cy.get('input.new-todo').type(todoItems[todo] + '{enter}')
+      cy.get('input.new-todo').type(todoItems[todo] + '{enter}')
 
     // mark 1st todo as completed + check it appears as completed
     cy.get('[data-testid="todo-item"]:contains(' + todoItems[0] + ')')
@@ -73,6 +73,31 @@ describe('Test the Todo app', () => {
   })
 
   // 4. delete a todo
+  it('should delete todo', () => {
+    // create 4 default todos
+    let todo
+    for ( todo in todoItems )
+      cy.get('input.new-todo').type(todoItems[todo] + '{enter}')
+
+    // delete 4th todo
+    cy.get('[data-testid="todo-item"]').last()
+      .find('.destroy').click( {force: true} )
+
+    // check the list contains only 3 todos now
+    cy.get('[data-testid="todo-item"]').eq(0)
+      .should('be.visible')
+      .should('have.text', todoItems[0])
+    cy.get('[data-testid="todo-item"]').eq(1)
+      .should('be.visible')
+      .should('have.text', todoItems[1])
+    cy.get('[data-testid="todo-item"]').eq(2)
+      .should('be.visible')
+      .should('have.text', todoItems[2])
+    cy.get('[data-testid="todo-item"]')
+      .contains(todoItems[3])
+      .should('not.exist')
+  })
+
   // 5. edit a todo
   // 6. mark all todos as completed
 })
