@@ -64,4 +64,34 @@ describe('Test the Flowpay landing page', () => {
         .contains(partnerPlatforms[partner])
         .should('be.visible')
   });
+
+  it.only('should test the language selector', () => {
+    cy.get('[data-testid="languages-dropdown-handle"]')
+      .click()
+    cy.get('[data-testid="languages-dropdown-option-text"]')
+      .contains('EN')
+      .click()
+    cy.url()
+      .should('include', '/en')
+    cy.get('#SITE_HEADER')
+      .within(() => {
+        cy.get('a:contains(Financing Calculator)')
+          .should('be.visible')
+        cy.get('a:contains(About Us)')
+          .should('be.visible')
+        cy.get('a:contains(Our Partner Platforms)')
+          .should('be.visible')
+        cy.get('button:contains(Log in)')
+          .should('be.visible')
+        cy.get('button:contains(I want financing)')
+        .should('be.visible')
+      })
+    cy.get('[data-testid="languages-dropdown-handle"]')
+      .click()
+    cy.get('[data-testid="languages-dropdown-option-text"]')
+      .contains('CS')
+      .click()
+    cy.url()
+      .should('eq', 'https://www.flowpay.io/')
+  });
 });
