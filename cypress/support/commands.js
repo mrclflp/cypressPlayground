@@ -24,7 +24,14 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-Cypress.Commands.add('createDefaultTodos', () => {
+export const closeCookies = () => {
+  cy.get('#cookiescript_close')
+    .click()
+  cy.get('#cookiescript_wrapper')
+    .should('not.be.visible')
+}
+
+export const createDefaultTodos = () => {
   const todoItems = [
     'buy milk & eggs',
     'call grandma',
@@ -35,4 +42,4 @@ Cypress.Commands.add('createDefaultTodos', () => {
   let todo
   for ( todo in todoItems )
     cy.get('input.new-todo').type(todoItems[todo] + '{enter}')
-})
+}

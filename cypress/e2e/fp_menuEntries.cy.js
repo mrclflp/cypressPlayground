@@ -1,11 +1,10 @@
+import * as Command from '../support/commands';
+
 describe('Test the Flowpay landing page', () => {
 
   beforeEach('visit the website', () => {
     cy.visit('https://www.flowpay.io')
-    cy.get('#cookiescript_close')
-      .click()
-    cy.get('#cookiescript_wrapper')
-      .should('not.be.visible')
+    Command.closeCookies()
   })
 
   const partnerPlatforms = [
@@ -65,7 +64,7 @@ describe('Test the Flowpay landing page', () => {
         .should('be.visible')
   });
 
-  it.only('should test the language selector', () => {
+  it('should test the language selector', () => {
     cy.get('[data-testid="languages-dropdown-handle"]')
       .click()
     cy.get('[data-testid="languages-dropdown-option-text"]')
