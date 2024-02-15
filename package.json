@@ -22,6 +22,7 @@
   "homepage": "https://github.com/mrclflp/cypressPlayground#readme",
   "devDependencies": {
     "cypress": "^13.6.3",
+    "eslint-plugin-cypress": "^2.15.1",
     "mochawesome": "^7.1.3"
   }
 }
