@@ -1,3 +1,5 @@
+import * as Command from '../support/commands';
+
 describe('Test the Todo app', () => {
 
   beforeEach('visit the app', () => {
@@ -39,7 +41,7 @@ describe('Test the Todo app', () => {
   // 3. mark todo as completed; check active & completed lists
   it('should mark todo as complete', () => {
     // create 4 default todos
-    cy.createDefaultTodos()
+    Command.createDefaultTodos()
 
     // mark 1st todo as completed + check it appears as completed
     cy.get('[data-testid="todo-item"]:contains(' + todoItems[0] + ')')
@@ -73,7 +75,7 @@ describe('Test the Todo app', () => {
   // 4. delete a todo
   it('should delete todo', () => {
     // create 4 default todos
-    cy.createDefaultTodos()
+    Command.createDefaultTodos()
 
     // delete 4th todo
     cy.get('[data-testid="todo-item"]').last()
@@ -97,7 +99,7 @@ describe('Test the Todo app', () => {
   // 5. edit a todo
   it('should edit todo', () => {
     // create default todos
-    cy.createDefaultTodos()
+    Command.createDefaultTodos()
 
     // edit 3rd todo
     cy.get('[data-testid="todo-item"]').eq(2)
@@ -114,7 +116,7 @@ describe('Test the Todo app', () => {
   // 6. mark all todos as completed
   it('should mark all todos as completed', () => {
     // create default todos
-    cy.createDefaultTodos()
+    Command.createDefaultTodos()
 
     // mark all todos as complete
     cy.get('#toggle-all')
